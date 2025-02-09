@@ -653,7 +653,14 @@ require('lazy').setup({
     version = 'v0.*',
 
     opts = {
-      keymap = { preset = 'default' },
+      keymap = {
+        preset = 'default',
+
+        ['<Tab>'] = { 'select_next', 'fallback' },
+        ['<S-Tab>'] = { 'select_prev', 'fallback' },
+
+        ['<Return>'] = { 'select_and_accept', 'fallback' }
+      },
 
       appearance = {
         use_nvim_cmp_as_default = true
