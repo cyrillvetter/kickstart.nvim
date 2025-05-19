@@ -613,7 +613,16 @@ require('lazy').setup({
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
-        rust_analyzer = {},
+        rust_analyzer = {
+          settings = {
+            ["rust-analyzer"] = {
+              completion = {
+                addCallParenthesis = false,
+                addCallArgumentSnippets = false,
+              }
+            }
+          }
+        },
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -623,25 +632,25 @@ require('lazy').setup({
         -- ts_ls = {},
         --
 
-        lua_ls = {
+        -- lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
           -- capabilities = {},
-          settings = {
-            Lua = {
-              completion = {
-                callSnippet = 'Replace',
-              },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
-            },
-          },
-        },
+          -- settings = {
+          -- Lua = {
+          --  completion = {
+          --    callSnippet = 'Replace',
+          --  },
+          --  -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+          --  -- diagnostics = { disable = { 'missing-fields' } },
+          --},
+          --},
+        -- },
       }
 
       -- Setup the servers set above.
       for server_name, config in pairs(servers) do
-        require('lspconfig').rust_analyzer.setup {config}
+        require('lspconfig')[server_name].setup(config)
       end
     end,
   },
